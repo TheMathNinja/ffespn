@@ -13,7 +13,10 @@
 #' @param max_scoring_period custom max_scoring_period (optional)
 #'
 #' @export
-ffespn_projections <- function(season, week, pos = slot_names, scoring = c("ppr", "non_ppr"), league_id = NULL, max_scoring_period=2) {
+ffespn_projections <- function(season, week, pos = slot_names,
+                               scoring = c("ppr", "non_ppr"),
+                               league_id = getOption("ffespn.league_id", "942845238"),
+                               max_scoring_period = 2) {
   # validate input
   pos <- match.arg(pos)
   scoring <- match.arg(scoring)
@@ -34,7 +37,7 @@ ffespn_projections <- function(season, week, pos = slot_names, scoring = c("ppr"
   if (is.null(league_id)) {
     path <- sprintf("seasons/%s/segments/0/leaguedefaults/%i", season, scoring_id)
   } else {
-    # league_id <- "134971153"
+    stopifnot(length(league_id) == 1L, !is.na(league_id), nzchar(as.character(league_id)))
     league_id <- as.character(league_id)
     path <- sprintf("seasons/%s/segments/0/leagues/%s", season, league_id)
   }
@@ -59,7 +62,6 @@ ffespn_projections <- function(season, week, pos = slot_names, scoring = c("ppr"
 
   # combine
   x_fantasy_filter <- list("players" = players)
-  print(jsonlite::toJSON(x_fantasy_filter))
   headers <- httr::add_headers(.headers = c(
     "X-Fantasy-Filter" = jsonlite::toJSON(x_fantasy_filter),
     "X-Fantasy-Source" = "kona",

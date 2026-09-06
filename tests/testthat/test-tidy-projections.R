@@ -1,7 +1,7 @@
 x <- readRDS("untidy-projections-dal.rds")
 
 test_that("tidy projections works", {
-  df <- tidy_projections(x)
+  df <- ffespn:::tidy_projections(x)
 
   expect_identical(nrow(df), 16L)
   expect_identical(ncol(df), 146L)

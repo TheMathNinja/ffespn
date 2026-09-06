@@ -38,6 +38,9 @@ This is a basic example which shows you how to get projections for week 0 (the p
 ```{r example}
 library(ffespn)
 
+# This maintained fork defaults to TheMathNinja's 2026 projection shell league.
+# Override it per call, or globally with options(ffespn.league_id = "...").
+
 # use default espn league
 qb <- ffespn_projections(2022, 0, "QB")
 qb

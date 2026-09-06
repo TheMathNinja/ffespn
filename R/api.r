@@ -35,7 +35,7 @@ ffespn_api <- function(path, query = NULL, headers = NULL) {
 
   # check data type
   if (httr::http_type(resp) != "application/json") {
-    stop("API did not return html", call. = FALSE)
+    stop("ESPN API did not return JSON", call. = FALSE)
   }
 
   # parse content

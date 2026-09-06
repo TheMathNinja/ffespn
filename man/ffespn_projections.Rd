@@ -9,7 +9,8 @@ ffespn_projections(
   week,
   pos = slot_names,
   scoring = c("ppr", "non_ppr"),
-  league_id = NULL
+  league_id = getOption("ffespn.league_id", "942845238"),
+  max_scoring_period = 2
 )
 }
 \arguments{
@@ -21,7 +22,9 @@ ffespn_projections(
 
 \item{scoring}{scoring type}
 
-\item{league_id}{custom league_id (optional)}
+\item{league_id}{custom league ID; defaults to option \code{ffespn.league_id}, then 942845238}
+
+\item{max_scoring_period}{custom max_scoring_period (optional)}
 }
 \description{
 Projections
